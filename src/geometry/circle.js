@@ -2,7 +2,7 @@
 
 class Circle {
 
-  constructor(_r = 1, _ref = {x: 0, y: 0}){
+  constructor(_r, _ref = {x: 0, y: 0}){
     if(_r < 0){
       throw RangeError("radius must be greater than or equal to zero");
     }//end if
