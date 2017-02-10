@@ -1,6 +1,6 @@
 # Crank Gaming Engine
 ## API quick reference
-### Point (x, y, [ref={x: 0, y: 0}])
+### Point (x, y [,ref={x: 0, y: 0}])
   + **Properties**
     - x
     - y
@@ -9,7 +9,7 @@
   + **Methods**
     - draw(ctx)
 
-### Circle (r, [ref={x: 0, y: 0}])
+### Circle (r [,ref={x: 0, y: 0}])
   + **Properties**
     - a
     - b
@@ -47,3 +47,13 @@
     - has(pt)
     - collidesWith(other)
     - draw(ctx)
+
+### Emitter (maxListeners=10)
+  + **Properties**
+    - events
+    - maxListeners
+  + **Methods**
+    - on(event, listener)
+    - once(event, listener)
+    - emit(event [,...args])
+    - remove(event, listener)
