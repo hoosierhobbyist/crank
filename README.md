@@ -1,6 +1,6 @@
 # Crank Gaming Engine
 ## API quick reference
-### Point (x, y [,ref={x: 0, y: 0}])
+### class Point (x, y [,ref={x: 0, y: 0}])
   + **Properties**
     - x
     - y
@@ -9,7 +9,7 @@
   + **Methods**
     - draw(ctx)
 
-### Circle (r [,ref={x: 0, y: 0}])
+### class Circle (r [,ref={x: 0, y: 0}])
   + **Properties**
     - a
     - b
@@ -21,7 +21,7 @@
     - collidesWith(other)
     - draw(ctx)
 
-### Line (pt1, pt2)
+### class Line (pt1, pt2)
   + **Properties**
     - m
     - b
@@ -34,7 +34,7 @@
     - intersection(ln)
     - draw(ctx)
 
-### Polygon (...pts)
+### class Polygon (...pts)
   + **Properties**
     - n
     - r
@@ -48,7 +48,7 @@
     - collidesWith(other)
     - draw(ctx)
 
-### Emitter (maxListeners=10)
+### class Emitter (maxListeners=10)
   + **Properties**
     - events
     - maxListeners
@@ -57,3 +57,20 @@
     - once(event, listener)
     - emit(event [,...args])
     - remove(event, listener)
+
+### Crank - Emitter instance
+  + **Properties**
+    - left
+    - right
+    - top
+    - bottom
+    - mouse
+    - canvas
+    - ctx
+    - isRunning
+    - frameRate
+  + **Methods**
+    - start()
+    - stop()
+    - clear()
+    - isDown(key)

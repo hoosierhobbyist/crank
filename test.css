@@ -1,4 +1,18 @@
-#test{
+body{
+  background-color: green;
+}
+
+.flex-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.flex-item{
+  margin: auto;
+}
+
+#crank{
   width: 1000px;
   height: 500px;
   background: black;

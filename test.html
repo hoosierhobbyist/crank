@@ -8,16 +8,12 @@
     <script src="./src/geometry/line.js"></script>
     <script src="./src/geometry/circle.js"></script>
     <script src="./src/geometry/polygon.js"></script>
+    <script src="./src/engine.js"></script>
   </head>
   <body>
-    <canvas id="test">ERROR!</canvas>
-    <script type="text/javascript">
-      let canvas = document.getElementById('test');
-      let ctx = canvas.getContext('2d');
-
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
-      ctx.translate(canvas.width/2, canvas.height/2);
-    </script>
+    <div class='flex-container'>
+      <h1 class='flex-item'>Crank Gaming Engine</h1>
+      <canvas id='crank' class='flex-item'>ERROR!</canvas>
+    </div>
   </body>
 </html>
