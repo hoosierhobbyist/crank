@@ -90,9 +90,9 @@ class Circle {
     if(other instanceof Circle){
       if(le(dist(this.center, other.center), this.r + other.r)){
         return true;
-      } else {
-        return false;
-      }//end if/else
+      }//end if
+
+      return false;
     } else if(other instanceof Polygon){
       if(gt(dist(this.center, other.center), this.r + other.r)){
         return false;
@@ -109,8 +109,19 @@ class Circle {
       }//end for
 
       return false;
+    } else if(other instanceof Line){
+      if(this.has(other.pts[0]) || this.has(other.pts[1])){
+        return true;
+      } else {
+        let intscts = this.inersections(other);
+        if(other.has(intscts[0]) || other.has(intscts[1])){
+          return true;
+        }//end if
+      }//end else
+
+      return false;
     } else {
-      throw TypeError("argument 'other' must be an instance of either Circle or Polygon");
+      throw TypeError("argument 'other' must be an instance of Line, Circle or Polygon");
     }//end if/else if/else
   }//end collidesWith
 

@@ -223,8 +223,23 @@ class Polygon {
       }//end for
 
       return false;
+    } else if(other instanceof Line){
+      if(this.has(other.pts[0]) || this.has(other.pts[1])){
+        return true;
+      } else {
+        for(let ln of this.lns){
+          let intsct = ln.intersection(other);
+          if(ln.has(intsct)){
+            if(other.has(intsct)){
+              return true;
+            }//end if
+          }//end if
+        }//end for
+      }//end if/else
+
+      return false;
     } else {
-      throw TypeError("argument 'other' must be an instance of either Circle or Polygon");
+      throw TypeError("argument 'other' must be an instance of Line, Circle or Polygon");
     }//end if/else if/else
   }//end collidesWith
 
