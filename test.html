@@ -9,6 +9,35 @@
     <script src="./src/geometry/circle.js"></script>
     <script src="./src/geometry/polygon.js"></script>
     <script src="./src/engine.js"></script>
+    <script src="./src/sprites/sprite.js"></script>
+    <script type="text/javascript">
+      let ball = null;
+
+      Crank.once('init', function(){
+        ball = new Sprite({r: 32, dx: -150, dy: -150, imgSrc: './images/redBall.png'});
+        ball.grow = true;
+
+        ball.on('update', function(){
+          if(this.grow){
+            this.scale += (1 / Crank.frameRate);
+            if(this.scale > 2){
+              this.grow = false;
+            }//end if
+          } else {
+            this.scale -= (1 / Crank.frameRate);
+            if(this.scale < .5){
+              this.grow = true;
+            }//end if
+          }//end if/else
+        });//end on('update')
+        ball.on('hit-boundary', Sprite.BOUNCE);
+        ball.on('draw-over', function(ctx){
+          this.edge.draw(ctx);
+        });//end on('draw-over')
+
+        this.start();
+      });//end once('init')
+    </script>
   </head>
   <body>
     <div class='flex-container'>

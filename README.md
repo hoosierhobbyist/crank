@@ -74,3 +74,38 @@
     - stop()
     - clear()
     - isDown(key)
+
+### class Sprite(config={})
+  + **Static Properties**
+    - defaults
+    - all
+    - groups
+    - zLevels
+    - DIE
+    - WRAP
+    - STOP
+    - BOUNCE
+  + **Static Methods**
+    - delete(sprite)
+    - clear()
+  + **Properties**
+    - x
+    - dx
+    - y
+    - dy
+    - z
+    - angle
+    - left
+    - right
+    - top
+    - bottom
+    - scale
+    - edge
+    - img
+    - visible
+  + **Methods**
+    - distanceTo(other)
+    - angleTo(other)
+    - collidesWith(other)
+    - draw()
+    - update()
