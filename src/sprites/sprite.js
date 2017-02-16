@@ -97,6 +97,34 @@ class Sprite extends Emitter {
           }//end if
         }//end set
       },//end angle
+      displacement: {
+        enumerable: true,
+        get: function(){
+          let mag = Math.sqrt(sq(this.x) + sq(this.y));
+          let angle = Math.atan2(this.y, this.x);
+          return new Vector(mag, angle);
+        },//end get
+        set: function(value){
+          if(value instanceof Vector){
+            this.x = value.xComp;
+            this.y = value.yComp;
+          }//end if
+        }//end set
+      },//end displacment
+      velocity: {
+        enumerable: true,
+        get: function(){
+          let mag = Math.sqrt(sp(this.dx) + sq(this.dy));
+          let angle = Math.atan2(this.dy, this.dx);
+          return new Vector(mag, angle);
+        },//end get
+        set: function(value){
+          if(value instanceof Vector){
+            this.dx = value.xComp;
+            this.dy = value.yComp;
+          }//end if
+        }//end set
+      },//end velocity
       left: {
         enumerable: true,
         get: function(){

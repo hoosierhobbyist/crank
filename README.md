@@ -58,6 +58,13 @@
     - emit(event [,...args])
     - remove(event, listener)
 
+### class Vector (mag, angle)
+  + **Properties**
+    - xComp
+    - yComp
+    - mag
+    - angle
+
 ### Crank - Emitter instance
   + **Properties**
     - left
@@ -95,6 +102,8 @@
     - dy
     - z
     - angle
+    - displacement
+    - velocity
     - left
     - right
     - top
