@@ -31,25 +31,25 @@ class Point {
           _y = value - _ref.y;
         }//end set
       },//end y
-      angle: {
+      a: {
         get: function(){
           return Math.atan2(_y, _x);
         },//end get
         set: function(value){
-          let radius = this.radius;
-          _x = radius * Math.cos(value);
-          _y = radius * Math.sin(value);
+          let r = this.r;
+          _x = r * Math.cos(value);
+          _y = r * Math.sin(value);
         }//end set
       },//end angle
-      radius: {
+      r: {
         get: function(){
           return Math.sqrt(sq(_x) + sq(_y));
         },//end get
         set: function(value){
-          let angle = this.angle;
-          _x = value * Math.cos(angle);
-          _y = value * Math.sin(angle);
-        }
+          let a = this.a;
+          _x = value * Math.cos(a);
+          _y = value * Math.sin(a);
+        }//end set
       }//end radius
     });//end defineProperties
 
@@ -59,7 +59,7 @@ class Point {
     ctx.save();
     ctx.fillStyle = "white";
     ctx.beginPath();
-    ctx.arc(this.x, -this.y, 3 , 0, 2*Math.PI);
+    ctx.arc(this.x, -this.y, 3 , 0, 2 * Math.PI);
     ctx.fill();
     ctx.restore();
   }//end draw

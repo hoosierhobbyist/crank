@@ -4,8 +4,8 @@
   + **Properties**
     - x
     - y
-    - angle
-    - radius
+    - a
+    - r
   + **Methods**
     - draw(ctx)
 

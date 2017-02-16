@@ -89,7 +89,7 @@ class Sprite extends Emitter {
           if(value = parseFloat(value)){
             if(edge instanceof Polygon){
               for(let pt of pts){
-                pt.angle += value - config.angle;
+                pt.a += value - config.angle;
               }//end for
             }//end if
 
@@ -161,7 +161,7 @@ class Sprite extends Emitter {
                 edge.r *= value / config.scale;
               } else if(edge instanceof Polygon){
                 for(let pt of pts){
-                  pt.radius *= value / config.scale;
+                  pt.r *= value / config.scale;
                 }//end for
               }//end if/else if
             }//end if
