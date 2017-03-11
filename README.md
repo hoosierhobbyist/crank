@@ -64,23 +64,11 @@
     - yComp
     - mag
     - angle
-
-### Crank - Emitter instance
-  + **Properties**
-    - left
-    - right
-    - top
-    - bottom
-    - mouse
-    - canvas
-    - ctx
-    - isRunning
-    - frameRate
   + **Methods**
-    - start()
-    - stop()
-    - clear()
-    - isDown(key)
+    - plus(other)
+    - minus(other)
+    - scale(value)
+    - dot(other)
 
 ### class Sprite(config={})
   + **Static Properties**
@@ -102,8 +90,8 @@
     - dy
     - z
     - angle
-    - displacement
-    - velocity
+    - disp
+    - vel
     - left
     - right
     - top
@@ -118,3 +106,33 @@
     - collidesWith(other)
     - draw()
     - update()
+
+### class HeavySprite(config={})
+  + **Static Properties**
+    - defaults
+  + **Properties**
+    - ddx
+    - ddy
+    - acc
+    - mass
+    - p
+  + **Methods**
+    - applyForce(frc)
+    - update()
+
+### Crank - Emitter instance
+  + **Properties**
+    - left
+    - right
+    - top
+    - bottom
+    - mouse
+    - canvas
+    - ctx
+    - isRunning
+    - frameRate
+  + **Methods**
+    - start()
+    - stop()
+    - clear()
+    - isDown(key)

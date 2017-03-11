@@ -5,36 +5,62 @@
     <script src="./src/misc/helpers.js"></script>
     <script src="./src/misc/emitter.js"></script>
     <script src="./src/misc/vector.js"></script>
+    <script src="./src/misc/timer.js"></script>
     <script src="./src/geometry/point.js"></script>
     <script src="./src/geometry/line.js"></script>
     <script src="./src/geometry/circle.js"></script>
     <script src="./src/geometry/polygon.js"></script>
     <script src="./src/misc/engine.js"></script>
     <script src="./src/sprites/sprite.js"></script>
+    <script src="./src/sprites/heavySprite.js"></script>
     <script type="text/javascript">
-      let ball = null;
+      let a = null;
+      let b = null;
 
       Crank.once('init', function(){
-        ball = new Sprite({r: 32, dx: -150, dy: -150, imgSrc: './images/redBall.png'});
-        ball.grow = true;
+        a = new HeavySprite({
+          r: 32,
+          x: -350,
+          y: 100,
+          //dx: 250,
+          mass: 1000000,
+          imgSrc: './images/redBall.png',
+        });//end a
+        b = new HeavySprite({
+          r: 32,
+          x: 350,
+          y: -100,
+          //dy: 375,
+          mass: 1000000,
+          imgSrc: './images/redBall.png'
+        });
 
-        ball.on('update', function(){
-          if(this.grow){
-            this.scale += (1 / Crank.frameRate);
-            if(this.scale > 2){
-              this.grow = false;
-            }//end if
-          } else {
-            this.scale -= (1 / Crank.frameRate);
-            if(this.scale < .5){
-              this.grow = true;
-            }//end if
-          }//end if/else
-        });//end on('update')
-        ball.on('hit-boundary', Sprite.BOUNCE);
-        ball.on('draw-over', function(ctx){
+        a.on('hit-boundary', Sprite.BOUNCE);
+        b.on('hit-boundary', Sprite.BOUNCE);
+
+        a.on('draw-over', function(ctx){
           this.edge.draw(ctx);
+          this.edge.center.draw(ctx);
         });//end on('draw-over')
+        b.on('draw-over', function(ctx){
+          this.edge.draw(ctx);
+          this.edge.center.draw(ctx);
+        });//end on('draw-over')
+
+        a.on('update', function(){
+          if(this.collidesWith(b)){
+            this.dx *= -1;
+            this.dy *= -1;
+          }//end if
+          this.applyForce(new Vector((this.mass * b.mass) / sq(this.distanceTo(b)), this.angleTo(b)));
+        });//end on('update')
+        b.on('update', function(){
+          if(this.collidesWith(a)){
+            this.dx *= -1;
+            this.dy *= -1;
+          }//end if
+          this.applyForce(new Vector((this.mass * a.mass) / sq(this.distanceTo(a)), this.angleTo(a)));
+        });//end on('update')
 
         this.start();
       });//end once('init')

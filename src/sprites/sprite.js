@@ -3,8 +3,6 @@
 class Sprite extends Emitter {
 
   constructor(config = {}){
-    super(config.maxListeners);
-
     let pts = null;
     let edge = null;
     let img = new Image();
@@ -14,6 +12,7 @@ class Sprite extends Emitter {
         config[key] = Sprite.defaults[key];
       }//end if
     }//end for
+    super(config.maxListeners);
 
     Object.defineProperties(this, {
       x: {
@@ -97,7 +96,7 @@ class Sprite extends Emitter {
           }//end if
         }//end set
       },//end angle
-      displacement: {
+      disp: {
         enumerable: true,
         get: function(){
           let mag = Math.sqrt(sq(this.x) + sq(this.y));
@@ -110,8 +109,8 @@ class Sprite extends Emitter {
             this.y = value.yComp;
           }//end if
         }//end set
-      },//end displacment
-      velocity: {
+      },//end disp
+      vel: {
         enumerable: true,
         get: function(){
           let mag = Math.sqrt(sp(this.dx) + sq(this.dy));
@@ -124,7 +123,7 @@ class Sprite extends Emitter {
             this.dy = value.yComp;
           }//end if
         }//end set
-      },//end velocity
+      },//end vel
       left: {
         enumerable: true,
         get: function(){
@@ -238,7 +237,7 @@ class Sprite extends Emitter {
         new Point(m * Math.cos(config.angle + a), m * Math.sin(config.angle + a), this),
         new Point(m * Math.cos(config.angle - a), m * Math.sin(config.angle - a), this),
         new Point(m * Math.cos(config.angle + Math.PI + a), m * Math.sin(config.angle + Math.PI + a), this),
-        new Point(m * Math.cos(config.angle + Math.PI - a), m * Math.sin(config.angle + Math.IP - a), this)
+        new Point(m * Math.cos(config.angle + Math.PI - a), m * Math.sin(config.angle + Math.PI - a), this)
       ];//end pts
       edge = new Polygon(...pts);
     }//end if/else if/else

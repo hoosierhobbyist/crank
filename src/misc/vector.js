@@ -62,4 +62,49 @@ class Vector {
     });//end defineProperties
   }//end constructor
 
+  plus(other){
+    if(!(other instanceof Vector)){
+      throw TypeError("argument 'other' must be an instance of Vector class");
+    }//end if
+
+    let xComp = this.xComp + other.xComp;
+    let yComp = this.yComp + other.yComp;
+    let mag = Math.sqrt(sq(xComp) + sq(yComp));
+    let angle = Math.atan2(yComp, xComp);
+
+    return new Vector(mag, angle);
+  }//end plus
+
+  minus(other){
+    if(!(other instanceof Vector)){
+      throw TypeError("argument 'other' must be an instance of Vector class");
+    }//end if
+
+    let xComp = this.xComp - other.xComp;
+    let yComp = this.yComp - other.yComp;
+    let mag = Math.sqrt(sq(xComp) + sq(yComp));
+    let angle = Math.atan2(yComp, xComp);
+
+    return new Vector(mag, angle);
+  }//end minus
+
+  scale(value){
+    if(typeof value !== 'number'){
+      throw TypeError("argument 'value' must be a number");
+    }//end if
+
+    this.mag *= value;
+    if(value < 0){
+      this.angle += Math.PI;
+    }//end if
+  }//end scale
+
+  dot(other){
+    if(!(other instanceof Vector)){
+      throw TypeError("argument 'other' must be an instance of the Vector class");
+    }//end if
+
+    return this.mag * other.mag * Math.cos(this.angle - other.angle);
+  }//end dot
+
 }//end class Vector
