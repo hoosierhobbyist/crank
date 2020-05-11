@@ -1,6 +1,6 @@
 //emitter.js
 
-class Emitter {
+export default class Emitter {
 
   constructor(_maxListeners = 10){
     if(!Number.isInteger(_maxListeners)){
