@@ -1,70 +1,50 @@
-export default class Emitter {
+export default class Emitter extends Map {
 	
 	constructor() {
-		Object.defineProperties(this, {
-			_events: {
-				enumerable: true,
-				value: new Map()
-			},//end _events
-		});//end defineProperties
+		super();
 	}//end constructor
 	
 	on(event, listener) {
-		if(!(typeof listener === 'function')){
-			throw TypeError("listener must be a function");
-		}//end if
-		
-		if(!this._events.has(event)){
-			this._events.set(event, new Set());
-		}//end if
-		this._events.get(event).add(listener);
-		
-		return this;
+        if(typeof event === 'string') {
+            if(typeof listener === 'function') {
+                if(!this.has(event)){
+                    this.set(event, new Set());
+                }//end if
+                this.get(event).add(listener);
+                return true;
+            }//end if
+        }//end if
+		return false;
 	}//end on
 	
 	once(event, listener) {
-		if(!(typeof listener === 'function')){
-			throw TypeError("listener must be a function");
-		}//end if
-		
-		if(!this._events.has(event)){
-			this._events.set(event, new Set());
-		}//end if
-		
-		let wrapper = function(self, args){
-			listener.apply(this, args);
-			this.remove(event, wrapper);
-		}//end wrapper
-		this._events.get(event).add(wrapper, this);
-		
-		return this;
-	}//end once
+        listener['ONCE'] = true;
+        return this.on(event, listener);
+    }//end once
+    
+    remove(event, listener) {
+        if(this.has(event)) {
+            if(this.get(event).delete(listener)) {
+                if(!this.get(event).size) {
+                    this.delete(event);
+                }//end if
+                return true;
+            }//end if
+        }//end if
+        return false;
+    }//end remove
 	
 	emit(event, ...args) {
-		if(this._events.has(event)){
-			this._events.get(event).forEach(function(listener) {
-				listener.apply(this, args);
-			}, this);//end forEach
+		if(this.has(event)) {
+			this.get(event).forEach((listener) => {
+                listener.apply(this, args);
+                if(listener['ONCE']) {
+                    this.remove(event, listener);
+                }//end if
+            });//end forEach
+            return true;
 		}//end if
-		
-		return this;
+		return false;
 	}//end emit
-	
-	remove(event, listener) {
-		if(this._events.has(event)){
-			if(this._events.get(event).has(listener)){
-				this._events.get(event).delete(listener);
-				if(!this._events.get(event).size) {
-					this._events.delete(event);
-				}//end if
-			}//end if
-		}//end if
-		
-		return this;
-	}//end remove
-	
-	listening(event) {
-		return this._events.has(event);
-	}//end listening
 	
 }//end class Emitter
