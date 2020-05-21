@@ -1,4 +1,4 @@
-class Point {
+export default class Point {
     
     constructor(x, y, ref = {x: 0, y: 0}) {
         
