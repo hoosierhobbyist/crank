@@ -1,3 +1,5 @@
+const ONCE = Symbol('execute tagged listener only once');
+
 export default class Emitter extends Map {
 	
 	constructor() {
@@ -18,7 +20,7 @@ export default class Emitter extends Map {
 	}//end on
 	
 	once(event, listener) {
-        listener['ONCE'] = true;
+        listener[ONCE] = true;
         return this.on(event, listener);
     }//end once
     
@@ -38,7 +40,7 @@ export default class Emitter extends Map {
 		if(this.has(event)) {
 			this.get(event).forEach((listener) => {
                 listener.apply(this, args);
-                if(listener['ONCE']) {
+                if(listener[ONCE]) {
                     this.remove(event, listener);
                 }//end if
             });//end forEach
