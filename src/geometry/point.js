@@ -1,44 +1,46 @@
 export default class Point {
     
-    constructor(x, y, ref = {x: 0, y: 0}) {
+    constructor(_x, _y, ref = {x: 0, y: 0}) {
         
         Object.defineProperties(this, {
+            _x: {
+                value: _x,
+                writable: true
+            },//end rel_x
+            _y: {
+                value: _y,
+                writable: true
+            },//end rel_y
             x: {
                 enumerable: true,
                 get: function() {
-                    return ref.x + x;
-                },//end get
-                set: function(value) {
-                    x = value - ref.x;
-                }//end set
+                    return ref.x + this._x;
+                }//end get
             },//end x
             y: {
                 enumerable: true,
                 get: function() {
-                    return ref.y + y;
-                },//end get
-                set: function(value) {
-                    y = value - ref.y;
-                }//end set
+                    return ref.y + this._y;
+                }//end get
             },//end y
             angle: {
                 get: function() {
-                    return Math.atan2(y, x);
+                    return Math.atan2(this._y, this._x);
                 },//end get
                 set: function(value) {
                     let r = this.radius;
-                    x = r * Math.cos(value);
-                    y = r * Math.sin(value);
+                    this._x = r * Math.cos(value);
+                    this._y = r * Math.sin(value);
                 }//end set
             },//end angle
             radius: {
                 get: function() {
-                    return Math.sqrt(sq(x) + sq(y));
+                    return Math.sqrt(Math.pow(this._x, 2) + Math.pow(this._y, 2));
                 },//end get
                 set: function(value) {
                     let a = this.angle;
-                    x = value * Math.cos(a);
-                    y = value * Math.sin(a);
+                    this._x = value * Math.cos(a);
+                    this._y = value * Math.sin(a);
                 }//end set
             }//end radius
         });//end defineProperties
